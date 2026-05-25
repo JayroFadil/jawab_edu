@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JawabEdu Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">JE</div>
+                <div>
+                    <h1>JawabEdu</h1>
+                    <p>Answer Engine Pendidikan</p>
+                </div>
+            </div>
+
+            <a class="new-chat" href="/">+ Percakapan baru</a>
+
+            <div class="side-card">
+                <p class="side-title">Contoh pertanyaan</p>
+                <ul>
+                    <li>Universitas terbaik Indonesia?</li>
+                    <li>Beasiswa pendidikan 2026</li>
+                    <li>Jalur masuk perguruan tinggi</li>
+                </ul>
+            </div>
+        </aside>
+
+        <section class="chat-panel">
+            <header class="topbar">
+                <div>
+                    <h2>JawabEdu Assistant</h2>
+                    <p>Search engine pendidikan dengan teknologi BM25</p>
+                </div>
+                <span class="status-dot">Demo UI</span>
+            </header>
+
+            <div class="chat-area">
+                <div class="message assistant">
+                    <div class="avatar">JE</div>
+                    <div class="bubble">
+                        <p>Halo! Saya JawabEdu. Silakan tanya tentang pendidikan, universitas, beasiswa, dan informasi akademik lainnya. Kami menggunakan teknologi BM25 untuk pencarian yang lebih akurat.</p>
+                    </div>
+                </div>
+
+                {% if pertanyaan %}
+                <div class="message user">
+                    <div class="bubble">
+                        <p>{{ pertanyaan }}</p>
+                    </div>
+                    <div class="avatar user-avatar">Anda</div>
+                </div>
+                {% endif %}
+
+                {% if hasil %}
+                <div class="message assistant">
+                    <div class="avatar">JE</div>
+                    <div class="bubble answer-bubble">
+                        <span class="label">Jawaban</span>
+                        {% if hasil.judul %}
+                        <p style="font-weight: bold; margin-bottom: 8px;">📌 {{ hasil.judul }}</p>
+                        {% endif %}
+                        <p>{{ hasil.jawaban }}</p>
+
+                        <div class="source-box">
+                            <strong>Sumber Referensi</strong>
+                            {% if hasil.sumber.startswith('http') %}
+                            <a href="{{ hasil.sumber }}" target="_blank" style="color: #0066cc; text-decoration: none;">{{ hasil.sumber }}</a>
+                            {% else %}
+                            <span>{{ hasil.sumber }}</span>
+                            {% endif %}
+                            {% if hasil.score %}
+                            <span style="margin-left: 10px; font-size: 0.9em; color: #666;">Relevance: {{ hasil.score }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <form method="POST" class="prompt-box">
+                <input
+                    type="text"
+                    name="pertanyaan"
+                    placeholder="Tanyakan sesuatu tentang informasi pendidikan..."
+                    value="{{ pertanyaan }}"
+                    required
+                    autocomplete="off"
+                >
+                <button type="submit" aria-label="Kirim pertanyaan">➜</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
