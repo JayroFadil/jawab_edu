@@ -27,4 +27,4 @@ Buka browser:
 http://127.0.0.1:5000
 ```
 
-Catatan: Project ini masih UI/demo sederhana. Belum menggunakan TF-IDF, BM25, atau IndoBERT.
+Catatan: Project ini menampilkan dua ranking terpisah: Top 10 BM25 dan Top 10 Cosine Similarity. Skor tidak digabung atau dirata-ratakan.
