@@ -18,27 +18,30 @@ class DatabaseManager:
         self.index_file = index_file
     
     def csv_to_json(self, csv_path):
-        """Konversi CSV ke JSON database"""
+        """Konversi CSV ke JSON database.
+        csv_path dapat berupa string tunggal atau list/tuple path CSV."""
         data_list = []
         doc_id = 1
         
         try:
-            with open(csv_path, 'r', encoding='utf-8') as csvfile:
-                reader = csv.DictReader(csvfile)
-                for row in reader:
-                    data_list.append({
-                        "id": doc_id,
-                        "tanggal": row.get('tanggal', ''),
-                        "judul": row.get('judul', ''),
-                        "isi_berita": row.get('isi_berita', ''),
-                        "link": row.get('link', ''),
-                        "kategori": self._extract_kategori(row.get('judul', ''))
-                    })
-                    doc_id += 1
+            csv_paths = [csv_path] if isinstance(csv_path, str) else list(csv_path)
+            for path in csv_paths:
+                with open(path, 'r', encoding='utf-8') as csvfile:
+                    reader = csv.DictReader(csvfile)
+                    for row in reader:
+                        data_list.append({
+                            "id": doc_id,
+                            "tanggal": row.get('tanggal', ''),
+                            "judul": row.get('judul', ''),
+                            "isi_berita": row.get('isi_berita', ''),
+                            "link": row.get('link', ''),
+                            "kategori": self._extract_kategori(row.get('judul', ''))
+                        })
+                        doc_id += 1
             
             # Simpan ke JSON
             self.save_data({"data": data_list})
-            print(f"✓ Berhasil konversi {len(data_list)} dokumen dari CSV ke JSON")
+            print(f"✓ Berhasil konversi {len(data_list)} dokumen dari {len(csv_paths)} CSV ke JSON")
             
             # Generate indexing
             self.generate_index(data_list)
@@ -195,8 +198,11 @@ if __name__ == "__main__":
     db_manager = DatabaseManager()
     
     # Contoh penggunaan:
-    # 1. Konversi CSV ke JSON
-    db_manager.csv_to_json('data_detail_pendidikan.csv')
+    # 1. Konversi beberapa CSV ke JSON sekaligus
+    db_manager.csv_to_json([
+        'data_detail_pendidikan.csv',
+        'data_detail_pendidikan_kompass.csv'
+    ])
     
     # 2. Tambah dokumen baru
     # db_manager.add_document(
