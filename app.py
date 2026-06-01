@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request
 import json
-from rank_bm25 import BM25Okapi
 from abbreviation_expander import AbbreviationExpander
 from similarity_calculator import SimilarityCalculator
+from bm25 import BM25
 import os
 
 app = Flask(__name__)
@@ -47,7 +47,7 @@ if data_list:
         doc = expanded_text.lower().split()
         documents.append(doc)
     
-    bm25 = BM25Okapi(documents)
+    bm25 = BM25(documents)
     similarity_calc = SimilarityCalculator.create_from_data(data_list)
 else:
     bm25 = None
