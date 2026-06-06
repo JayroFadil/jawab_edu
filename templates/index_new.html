@@ -14,8 +14,8 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f5f5f5;
-            color: #1a1a1a;
+            background: #ffffff;
+            color: #202124;
         }
 
         .container {
@@ -30,20 +30,18 @@
             justify-content: space-between;
             align-items: center;
             padding: 16px 24px;
-            background: #ffffff;
-            border-bottom: 1px solid #e0e0e0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            background: #f8f9fa;
+            border-bottom: 1px solid #dadce0;
         }
 
         .header-logo {
             font-size: 24px;
-            font-weight: 700;
-            color: #1a73e8;
+            font-weight: bold;
+            color: #4285f4;
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 8px;
-            letter-spacing: -0.5px;
         }
 
         .header-logo:hover {
@@ -57,9 +55,8 @@
         }
 
         .header-icons a {
-            color: #1a73e8;
+            color: #4285f4;
             text-decoration: none;
-            font-size: 13px;
         }
 
         .header-icons a:hover {
@@ -80,7 +77,7 @@
         .search-section.with-results {
             justify-content: flex-start;
             padding: 20px 0;
-            background: #ffffff;
+            background: #f8f9fa;
         }
 
         .search-logo {
@@ -91,11 +88,11 @@
         }
 
         .search-logo .jawab {
-            color: #1a73e8;
+            color: #4285f4;
         }
 
         .search-logo .edu {
-            color: #d33b27;
+            color: #ea4335;
         }
 
         .search-tagline {
@@ -121,40 +118,40 @@
         .search-input {
             flex: 1;
             padding: 12px 16px;
-            border: 1px solid #e0e0e0;
+            border: 1px solid #dadce0;
             border-radius: 24px;
             font-size: 16px;
             background: #ffffff;
-            color: #1a1a1a;
-            transition: all 0.2s ease;
+            color: #202124;
+            transition: all 0.3s ease;
         }
 
         .search-input:hover {
-            box-shadow: 0 1px 6px rgba(26, 115, 232, 0.15);
-            border-color: #1a73e8;
+            box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+            border-color: #dadce0;
         }
 
         .search-input:focus {
             outline: none;
-            box-shadow: 0 1px 8px rgba(26, 115, 232, 0.2);
-            border-color: #1a73e8;
+            box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+            border-color: #dadce0;
         }
 
         .search-button {
             padding: 0 24px;
-            border: none;
+            border: 1px solid #f8f9fa;
             border-radius: 4px;
-            background: #1a73e8;
-            color: #ffffff;
+            background: #f8f9fa;
+            color: #3c4043;
             font-size: 14px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             font-weight: 500;
         }
 
         .search-button:hover {
-            background: #1557b0;
-            box-shadow: 0 2px 8px rgba(26, 115, 232, 0.25);
+            border: 1px solid #dadce0;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
         }
 
         /* Suggestions */
@@ -176,35 +173,34 @@
 
         .suggestion-item {
             padding: 8px 12px;
-            border: 1px solid #e0e0e0;
+            border: 1px solid #dadce0;
             border-radius: 20px;
-            background: #ffffff;
-            color: #1a1a1a;
+            background: #f8f9fa;
+            color: #1f2937;
             font-size: 13px;
             cursor: pointer;
             transition: all 0.2s;
         }
 
         .suggestion-item:hover {
-            border-color: #1a73e8;
-            background: #f0f7ff;
-            box-shadow: 0 1px 4px rgba(26, 115, 232, 0.15);
+            border-color: #4285f4;
+            background: #ffffff;
+            box-shadow: 0 1px 1px rgba(32, 33, 36, 0.28);
         }
 
         /* Results Section */
         .results-container {
-            margin: 0;
-            padding: 20px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
             width: 100%;
         }
 
         .search-info {
             font-size: 14px;
-            color: #202124;
-            margin-bottom: 24px;
-            padding: 12px 0;
-            border-bottom: 1px solid #e0e0e0;
-            font-weight: 500;
+            color: #70757a;
+            margin-bottom: 20px;
+            padding: 0 10px;
         }
 
         .algorithms-grid {
@@ -215,26 +211,22 @@
         }
 
         .algorithm-section {
-            background: #ffffff;
-            border-left: 4px solid #1a73e8;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+            border-top: 3px solid #4285f4;
+            padding-top: 15px;
         }
 
         .algorithm-section.cosine {
-            border-left-color: #d33b27;
+            border-top-color: #ea4335;
         }
 
         .algorithm-header {
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 18px;
-            color: #1a1a1a;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #202124;
             display: flex;
             align-items: center;
             gap: 8px;
-            text-transform: capitalize;
         }
 
         .algorithm-badge {
@@ -250,22 +242,13 @@
         }
 
         .result-item {
-            margin-bottom: 18px;
-            padding: 14px;
-            background: #f9f9f9;
-            border-radius: 6px;
-            border: 1px solid #f0f0f0;
-            transition: all 0.2s;
-        }
-
-        .result-item:hover {
-            background: #ffffff;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+            margin-bottom: 22px;
+            padding-bottom: 16px;
         }
 
         .result-url {
-            color: #70757a;
-            font-size: 12px;
+            color: #006621;
+            font-size: 13px;
             text-decoration: none;
             word-break: break-all;
         }
@@ -275,53 +258,48 @@
         }
 
         .result-title {
-            color: #1a73e8;
-            font-size: 18px;
-            font-weight: 600;
-            margin: 8px 0;
+            color: #1f2937;
+            font-size: 20px;
+            font-weight: 500;
+            margin: 6px 0;
             text-decoration: none;
             cursor: pointer;
-            line-height: 1.4;
         }
 
         .result-title:hover {
+            color: #1a73e8;
             text-decoration: underline;
         }
 
         .result-snippet {
-            color: #3c3c3c;
-            font-size: 13px;
+            color: #545454;
+            font-size: 14px;
             line-height: 1.6;
             margin: 8px 0;
         }
 
         .result-meta {
             font-size: 12px;
-            color: #666666;
-            margin-top: 8px;
+            color: #70757a;
+            margin-top: 6px;
             display: flex;
             flex-wrap: wrap;
-            gap: 14px;
-        }
-
-        .result-meta span {
-            display: inline-flex;
-            align-items: center;
+            gap: 12px;
         }
 
         .result-score {
             display: inline-block;
-            background: #e3f2fd;
-            color: #1a73e8;
+            background: #f0f7ff;
+            color: #0066cc;
             padding: 4px 8px;
             border-radius: 4px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
-            margin-top: 8px;
+            margin-top: 6px;
         }
 
         .result-score.cosine {
-            background: #fee8e6;
+            background: #fff0f0;
             color: #d33b27;
         }
 
@@ -422,7 +400,7 @@
             {% if hasil.bm25_results or hasil.cosine_results %}
                 <div class="results-container">
                     <div class="search-info">
-                        Pencarian: <strong>{{ hasil.query }}</strong>
+                        🔍 <strong>{{ hasil.query }}</strong>
                         {% if hasil.expanded_query != hasil.query %}
                             | Expanded: <strong>{{ hasil.expanded_query }}</strong>
                         {% endif %}
@@ -443,10 +421,10 @@
                                         <p class="result-snippet">{{ result.jawaban }}</p>
                                         <div class="result-meta">
                                             {% if result.kategori %}
-                                                <span>Kategori: {{ result.kategori }}</span>
+                                                <span>📁 {{ result.kategori }}</span>
                                             {% endif %}
                                             {% if result.tanggal %}
-                                                <span>Tanggal: {{ result.tanggal }}</span>
+                                                <span>📅 {{ result.tanggal }}</span>
                                             {% endif %}
                                         </div>
                                         <span class="result-score">Skor: {{ result.score }}</span>
@@ -473,10 +451,10 @@
                                         <p class="result-snippet">{{ result.jawaban }}</p>
                                         <div class="result-meta">
                                             {% if result.kategori %}
-                                                <span>Kategori: {{ result.kategori }}</span>
+                                                <span>📁 {{ result.kategori }}</span>
                                             {% endif %}
                                             {% if result.tanggal %}
-                                                <span>Tanggal: {{ result.tanggal }}</span>
+                                                <span>📅 {{ result.tanggal }}</span>
                                             {% endif %}
                                         </div>
                                         <span class="result-score cosine">Skor: {{ result.score }}</span>

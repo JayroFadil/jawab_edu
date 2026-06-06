@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JawabEdu Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .search-area {
+            width: min(1100px, 100%);
+            margin: 0 auto;
+            padding: 24px 0 40px;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 0;
+            padding: 16px 18px;
+            border: 1px solid #d1d5db;
+            border-radius: 999px;
+            font-size: 16px;
+            background: #ffffff;
+            color: #111827;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+        }
+
+        .search-button {
+            border: none;
+            border-radius: 999px;
+            background: #10a37f;
+            color: white;
+            padding: 0 24px;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(16, 163, 127, 0.18);
+        }
+
+        .search-button:hover {
+            background: #0d8f70;
+        }
+
+        .query-info {
+            margin-top: 24px;
+            padding: 18px 20px;
+            border-radius: 16px;
+            background: #f8fbff;
+            border: 1px solid #dbeafe;
+            color: #0f172a;
+        }
+
+        .query-info strong {
+            color: #1d4ed8;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .results-section {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 18px 50px rgba(15, 23, 42, 0.04);
+        }
+
+        .results-section h3 {
+            margin: 0 0 18px;
+            font-size: 1.05rem;
+            color: #111827;
+        }
+
+        .result-card {
+            padding: 18px;
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 16px;
+            background: #f8fafc;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .result-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        .result-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .result-title {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1f2937;
+            line-height: 1.4;
+        }
+
+        .result-link {
+            display: block;
+            margin-top: 10px;
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 0.95rem;
+            word-break: break-word;
+        }
+
+        .result-link:hover {
+            text-decoration: underline;
+        }
+
+        .result-score-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #e0f2fe;
+            color: #0c4a6e;
+            font-size: 0.82rem;
+            border: 1px solid #bae6fd;
+        }
+
+        .result-snippet {
+            margin: 12px 0 0;
+            color: #4b5563;
+            font-size: 0.94rem;
+            line-height: 1.7;
+        }
+
+        .result-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+            color: #475569;
+        }
+
+        .meta-tag {
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+        }
+
+        .results-empty {
+            padding: 28px 18px;
+            border-radius: 16px;
+            background: #f8fafc;
+            color: #475569;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 1024px) {
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">JE</div>
+                <div>
+                    <h1>JawabEdu</h1>
+                    <p>Search engine pendidikan</p>
+                </div>
+            </div>
+
+            <div class="side-card">
+                <p class="side-title">Contoh pencarian</p>
+                <ul>
+                    <li>Universitas terbaik Indonesia</li>
+                    <li>Beasiswa pendidikan 2026</li>
+                    <li>Jalur masuk perguruan tinggi negeri</li>
+                    <li>Ranking UI dan ITB</li>
+                    <li>Informasi PTN favorit</li>
+                </ul>
+            </div>
+
+            <div class="side-card" style="margin-top: 15px;">
+                <p class="side-title">Algoritma</p>
+                <ul style="font-size: 0.9em;">
+                    <li>🔴 BM25</li>
+                    <li>🔵 Cosine Similarity</li>
+                    <li>Top 10 hasil</li>
+                    <li>Tampilan hasil seperti mesin pencari</li>
+                </ul>
+            </div>
+        </aside>
+
+        <section class="search-panel">
+            <header class="topbar">
+                <div>
+                    <h2>JawabEdu Search</h2>
+                    <p>Temukan informasi pendidikan dengan hasil yang mudah dibaca dan terstruktur.</p>
+                </div>
+                <span class="status-dot">Dual Comparison</span>
+            </header>
+
+            <div class="search-area">
+                <form method="POST" class="search-form">
+                    <input
+                        class="search-input"
+                        type="text"
+                        name="pertanyaan"
+                        placeholder="Tanyakan sesuatu tentang informasi pendidikan..."
+                        value="{{ pertanyaan }}"
+                        required
+                        autocomplete="off"
+                    >
+                    <button class="search-button" type="submit">Cari</button>
+                </form>
+
+                {% if hasil %}
+                    {% if hasil.bm25_results or hasil.cosine_results %}
+                        <div class="query-info">
+                            <div class="query-text">🔍 Pencarian: {{ hasil.query }}</div>
+                            <div class="query-expanded">Expanded: <strong>{{ hasil.expanded_query }}</strong></div>
+                        </div>
+
+                        <div class="results-grid">
+                            <div class="results-section">
+                                <h3>BM25 - {{ hasil.bm25_count }} hasil</h3>
+                                {% if hasil.bm25_results %}
+                                    {% for result in hasil.bm25_results %}
+                                    <div class="result-card">
+                                        <p class="result-title">{{ result.judul }}</p>
+                                        <div class="result-score-card">Skor: {{ result.score }}</div>
+                                        <p class="result-snippet">{{ result.jawaban }}</p>
+                                        <div class="result-meta">
+                                            {% if result.kategori %}
+                                            <span class="meta-tag">Kategori: {{ result.kategori }}</span>
+                                            {% endif %}
+                                            {% if result.tanggal %}
+                                            <span class="meta-tag">Tanggal: {{ result.tanggal }}</span>
+                                            {% endif %}
+                                        </div>
+                                        {% if result.sumber.startswith('http') %}
+                                        <a href="{{ result.sumber }}" target="_blank" class="result-link">Sumber</a>
+                                        {% endif %}
+                                    </div>
+                                    {% endfor %}
+                                {% else %}
+                                <div class="results-empty">Tidak ada hasil dari BM25.</div>
+                                {% endif %}
+                            </div>
+
+                            <div class="results-section">
+                                <h3>Cosine Similarity - {{ hasil.cosine_count }} hasil</h3>
+                                {% if hasil.cosine_results %}
+                                    {% for result in hasil.cosine_results %}
+                                    <div class="result-card">
+                                        <p class="result-title">{{ result.judul }}</p>
+                                        <div class="result-score-card">Skor: {{ result.score }}</div>
+                                        <p class="result-snippet">{{ result.jawaban }}</p>
+                                        <div class="result-meta">
+                                            {% if result.kategori %}
+                                            <span class="meta-tag">Kategori: {{ result.kategori }}</span>
+                                            {% endif %}
+                                            {% if result.tanggal %}
+                                            <span class="meta-tag">Tanggal: {{ result.tanggal }}</span>
+                                            {% endif %}
+                                        </div>
+                                        {% if result.sumber.startswith('http') %}
+                                        <a href="{{ result.sumber }}" target="_blank" class="result-link">Sumber</a>
+                                        {% endif %}
+                                    </div>
+                                    {% endfor %}
+                                {% else %}
+                                <div class="results-empty">Tidak ada hasil dari Cosine Similarity.</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="results-empty">{{ hasil.jawaban }}</div>
+                    {% endif %}
+                {% elif pertanyaan %}
+                    <div class="results-empty">Sedang memproses pertanyaan Anda...</div>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>

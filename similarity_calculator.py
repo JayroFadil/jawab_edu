@@ -96,10 +96,8 @@ class SimilarityCalculator:
                 dot_product += vec1_norm[term] * vec2_norm[term]
         
         # Magnitude sudah 1 karena normalized, jadi similarity = dot_product
-        similarity = dot_product
-        
-        # Normalize ke scale 0-100 untuk consistency dengan BM25
-        similarity_score = similarity * 100
+        # Cosine similarity adalah nilai antara 0 dan 1
+        similarity_score = dot_product
         
         return similarity_score
     
